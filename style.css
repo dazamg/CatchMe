@@ -1,18 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap');
 * {
     box-sizing: border-box;
 
   }
   
   body {
-      background: url(https://i.imgur.com/PAJmsVS.jpeg) no-repeat;
+      background: url("./florian-klauer-mk7D-4UCfmg-unsplash.jpg") no-repeat;
       background-size: 100%;
+      background-position: top;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      font-family: 'Sansita Swashed', cursive;
+  }
+
+  .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.482);
+    z-index: 2;
+    top: 0;
+    left: 0;
+  }
+
+  .top-container {
+    height: 20%;
+    width: 100%; 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 3;
   }
   section {
     /* background-color: hsl(195, 100%, 50%); */
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 100vh;
+    
     margin: 0;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   } 
@@ -44,40 +73,38 @@
     bottom: 30px;
     left: 30px;
   }
-  
-  .settings {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    /* background-color: rgba(0, 0, 0, 0.3); */
-    height: 70px;
+
+  .top-container__settings, .top-container__setArray {
+    width: 40%;
     color: #fff;
+    text-shadow: 1px 3px rgba(0,0,0, 0.25);
+    font-size: 1.5rem;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    justify-content: right;
-    transform: translateY(0);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .settings.hide {
-    transform: translateY(-100%);
   }
 
-  .setArray {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; 
-    /* background-color: rgba(0, 0, 0, 0.3); */
-    height: 70px;
-    color: #fff;
+  form {
+    width: 100%;
+  }
+
+  .display-flex {
     display: flex;
-    align-items: center; 
     justify-content: center;
-    transform: translateY(0);
-    transition: transform 0.3s ease-in-out;  
-  } 
+    align-items: center;
+    width: 100%;
+  }
+  .display-flex label {
+    margin: 1rem;
+    letter-spacing: 1px;
+  }
+
+
+/*   
+  .settings.hide {
+    transform: translateY(-100%);
+  } */
+
   
   .container {
     background-image: url(https://i.imgur.com/0HH9bVV.jpg);
@@ -88,6 +115,7 @@
     position: relative;
     text-align: center;
     width: 500px;
+    z-index: 3;
   }
   
   h2 {
@@ -141,7 +169,4 @@
   .footer {
       color: yellow;
       text-align: center;
-  }
-  .list {
-      
   }

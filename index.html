@@ -8,12 +8,13 @@
     <title>Speed Typer</title>
   </head>
   <body>
-
+    <div class="overlay"></div>
+    <div class="top-container">
     <!--game settings-->
-    <div id="settings" class="settings">
+    <div id="settings" class="top-container__settings">
       <form id="settings-form">
           <!--Difficulty settings-->
-        <div>
+        <div class="display-flex">
           <label for="difficulty">Difficulty</label>
           <select id="difficulty">
             <option value="easy">Easy</option>
@@ -23,10 +24,10 @@
         </div>
       </form>
         </div>
-    <div id="set" class="setArray">
+    <div id="set" class="top-container__setArray">
         <form id="differentarrays"> 
                 <!--Difficulty settings-->
-        <div>
+        <div class="display-flex">
             <label for="game">Select game</label>
                 <select id="game">
                     <option value="animals">Animals</option>
@@ -35,6 +36,7 @@
                 </select>
         </div>
         </form>
+    </div>
     </div>
     <!--game container-->
     <section id="game">

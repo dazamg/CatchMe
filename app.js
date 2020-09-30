@@ -49,6 +49,9 @@ let score = 0;
 //Variable for time
 let time = 11;
 
+//Variable for penalty
+let penalty = time--;
+
 //function to return a random Word
 const randomWords = () => {
     return words[Math.floor(Math.random() * words.length)];    
@@ -112,6 +115,12 @@ const startGame = () => {
 }
 startGame()
 
+// const penaltyScore = () => {
+//     if(insertedText === false) {
+//         penalty = false;
+//         time -= 5;
+//     }
+// }
 // select word
 const word = document.getElementById('word');
 const getWord = () => {
@@ -146,6 +155,7 @@ text.addEventListener('input', (e) => {
     if(insertedText === randomWord) {
         getWord();
         addScore();
+        penaltyScore()
     //Need to clear the text after it has been written to continue playing
     e.target.value = '';
     if(difficulty === 'hard') {
@@ -155,7 +165,9 @@ text.addEventListener('input', (e) => {
     } else {
         time += 5;
     }
-
+    if(insertedText === false) {
+        time -= 3;
+    }
     
     }
 })
