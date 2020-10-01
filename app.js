@@ -3,7 +3,7 @@
 // -must be able to determine time√
 // -MUST be able to count the words √
 // -Must be able to display score for how fast they type√
-// const getWord = () => {
+
 
 // List of Animals
 const words = ['dog', 'rabbit', 'cat', 'shark', 'seahorse', 'turtle',
