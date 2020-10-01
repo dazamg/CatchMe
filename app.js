@@ -3,6 +3,7 @@
 // -must be able to determine time√
 // -MUST be able to count the words √
 // -Must be able to display score for how fast they type√
+// const getWord = () => {
 
 // List of Animals
 const words = ['dog', 'rabbit', 'cat', 'shark', 'seahorse', 'turtle',
@@ -22,8 +23,11 @@ const fvWords = [ 'banana', 'carrot', 'spinach', 'orange', 'mango', 'grapes', 's
 ]
 
 
-const settings = document.getElementById('settings');
-
+// const settings = document.getElementById('settings');
+let mans = document.getElementById('man')
+// let optionTwo = document.getElementById('two')
+// let optionThree = document.getElementById('three')
+// console.log(optionTwo.value)
 const diffSelect = document.getElementById('difficulty');
 let difficulty = localStorage.getItem('difficulty') !== null ?
 localStorage.getItem('difficulty') : 'medium';
@@ -32,27 +36,24 @@ diffSelect.value =
 localStorage.getItem('difficulty') !== null ?
 localStorage.getItem('difficulty') : 'medium';
 
-const gameType = document.getElementById('game');
-let game = localStorage.getItem('game') !== null ?
-localStorage.getItem('game') : 'planets';
+// const gameType = document.getElementById('man');
+// let mans = localStorage.getItem('man') !== null ?
+// localStorage.getItem('man') : 'planets';
 
-gameType.value = 
-localStorage.getItem('game') !== null ?
-localStorage.getItem('game') : 'planets';
+// gameType.value = 
+// localStorage.getItem('man') !== null ?
+// localStorage.getItem('man') : 'planets';
 
 // Variable for random word
 let randomWord;
 
-//Variable for score
-let score = 0;
-
 //Variable for time
 let time = 11;
 
-//Variable for penalty
-let penalty = time--;
+//Variable for score
+let score = 0;
 
-//function to return a random Word
+//function to return a random Animal
 const randomWords = () => {
     return words[Math.floor(Math.random() * words.length)];    
 }
@@ -66,9 +67,9 @@ const randomFruits = () => {
 }
 
 const endGame = document.getElementById('end-game-container');
-//function to finsih and reset game
+//function to finish and reset game
 const finish = () => {
-    if(score <= 4) {
+    if(score <= 7) {
         endGame.innerHTML = `
         <h1>You lost your rabbit</h1>
         <p>Your final score is ${score}</p>
@@ -76,7 +77,7 @@ const finish = () => {
         <button onclick='location.reload()'>Reload</button>
         `; 
     }
-    else if(score > 4 || score <= 8) {
+    else if(score > 7 || score <= 12) {
         endGame.innerHTML = `
         <h1>You an All Star</h1>
         <p>Your final score is ${score}</p>
@@ -92,9 +93,9 @@ const finish = () => {
     }
     endGame.style.display = 'flex';
 }
+// start game function
 
-const startGame = () => {
-    document.getElementById('start').addEventListener('click', () => {
+document.getElementById('start').addEventListener('click', () => {
 //Timer
 //setInterval allows user to run a specific function
 //In this case i need my time to be updated
@@ -108,37 +109,32 @@ const startGame = () => {
             finish();
         }
     }
-    const timeInterval = setInterval(updateTime, 1100);
+    const timeInterval = setInterval(updateTime, 1100); 
+})
 
-    })
-    
-}
-startGame()
+// const optOne = () => {
+    //     if(optionOne === word.innerText){
+        //         randomWord()
+        //     } else if(optionTwo === word.innerText){
+            //         randomPlanet()
+            //     } else if(optionThree === word.innerText){
+                //         randomWord()
+                //     }
+                // }
+                // // const word = document.getElementById('word')
+                // const getWord = () => {
+                //     if(words.innerText === 'animals') {
+                //         randomWord = randomWords();
+                //         word.innerText = randomWord;
+                //     } else if(words.innerText === 'planets') {
+                //         randomWord = randomPlanets();
+                //         word.innerText = randomWord; 
+                //     } else if(words.innerText === 'fruits') {
+                //         randomWord = randomFruits();
+                //         word.innerText = randomWord; 
+                //     }
 
-// const penaltyScore = () => {
-//     if(insertedText === false) {
-//         penalty = false;
-//         time -= 5;
-//     }
-// }
-// select word
-const word = document.getElementById('word');
-const getWord = () => {
-    if(game === 'animals') {
-    randomWord = randomWords();
-    word.innerHTML = randomWord;
-    } else if(game === 'planets') {
-    randomWord = randomPlanet();
-    word.innerHTML = randomWord; 
-    } else if(game === 'fruits') {
-    randomWord = fvWords();
-    word.innerHTML = randomWord;
-    }
-}
-getWord()
-
-// select Planet
- 
+                    
 
 //Function to update score
 const scores = document.getElementById('score');
@@ -146,31 +142,64 @@ const addScore = () => {
     score++;
     scores.innerHTML = score;
 }
+// const getWord = () => {
+//     console.log(mans.value)
+//     if(mans.value === 'animals') {
+//         randomWord = randomWords();
+//         word.innerText = randomWord;
+//     } else if(mans.value === 'planets') {
+//         randomWord = randomPlanet();
+//         word.innerText = randomWord;
+//     } else if(mans === 'fruits') {
+//         randomWord = randomFruits();
+//         word.innerText = randomWord;
+//     }
+// }  
+// getWord()
+// match current inputed text with the random word 
+const inputText = () => {
+    const text = document.getElementById('text');
+    text.addEventListener('input', (e) => {
+        const insertedText = e.target.value;
+        console.log(insertedText, randomWord)
+        if(insertedText === randomWord) {     
+            // getWord();
+            addScore();
+            //Need to clear the text after it has been written to continue playing
+            e.target.value = '';
+            if(difficulty === 'hard') {
+                time += 2;
+            } else if(difficulty === 'medium') {
+                time +=3;
+            } else {
+                time += 5;
+            } 
+        }
+    })
+}
+inputText()
 
-//Function to update time
+const changeGame = () => {
 
-const text = document.getElementById('text');
-text.addEventListener('input', (e) => {
-    const insertedText = e.target.value;
-    if(insertedText === randomWord) {
-        getWord();
-        addScore();
-        penaltyScore()
-    //Need to clear the text after it has been written to continue playing
-    e.target.value = '';
-    if(difficulty === 'hard') {
-        time += 2;
-    } else if(difficulty === 'meduim') {
-        time +=3
-    } else {
-        time += 5;
-    }
-    if(insertedText === false) {
-        time -= 3;
-    }
-    
-    }
-})
+    const selectElement = document.querySelector('.gamemode');                   
+    selectElement.addEventListener('change', (event) => {
+        const result = document.getElementById('word');
+        if(event.target.value === 'animals') {
+            randomWord = randomWords();
+            word.innerText = randomWord;
+            
+        } else if(event.target.value === 'planets') {
+            randomWord = randomPlanet();
+            word.innerText = randomWord;
+            
+        } else if(event.target.value === 'fruits') {
+            randomWord = randomFruits();
+            word.innerText = randomWord;
+        }
+    });
+}
+changeGame()
+
 
 //
 const form = document.getElementById('settings-form');
@@ -179,10 +208,44 @@ form.addEventListener('change', (e) => {
     localStorage.setItem('difficulty', difficulty);
 });
 
-const newArray = document.getElementById('differentarrays');
-form.addEventListener('change', (e) => {
-    game = e.target.value;
-    localStorage.setItem('game', game);
-});
 
 
+
+
+
+
+// const newArray = document.getElementById('differentarrays');
+// form.addEventListener('change', (e) => {
+//     games = e.target.value;
+//     localStorage.setItem('cldd', games);
+// }); 
+//     if(optionOne.value === 'animals') {
+        // randomWord = randomWords();
+        // word.innerHTML = randomWord;
+//     } else if(optionTwo.value === 'planets') {
+//             randomWord = randomPlanet();
+//              word.innerHTML = randomWord;
+//         } else if(optionTwo.value === 'fruits') {
+//             randomWord = randomPlanet();
+//             word.innerHTML = randomWord;
+//         }       
+//  }
+
+// const getWord = () => {
+
+//     const selectElement = document.querySelector('.gamemode');                   
+//     selectElement.addEventListener('change', (event) => {
+//         const result = document.getElementById('word');
+//         if(event.target.value === 'animals') {
+//             randomWord = randomWords();
+//             result.textContent = randomWord;
+//         } else if(event.target.value === 'planets') {
+//             randomWord = randomPlanet();
+//             word.innerText = randomWord;
+//         } else if(event.target.value === 'fruits') {
+//             randomWord = randomFruits();
+//             word.innerText = randomWord;;
+//         }
+//     });
+// }
+// getWord()

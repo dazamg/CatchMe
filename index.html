@@ -11,52 +11,63 @@
     <div class="overlay"></div>
     <div class="top-container">
     <!--game settings-->
-    <div id="settings" class="top-container__settings">
-      <form id="settings-form">
+      <div id="settings" class="top-container__settings">
+        <form id="settings-form">
           <!--Difficulty settings-->
-        <div class="display-flex">
-          <label for="difficulty">Difficulty</label>
-          <select id="difficulty">
-            <option value="easy">Easy</option>
-            <option value="medium">Medium</option>
-            <option value="hard">Hard</option>
-          </select>
-        </div>
-      </form>
-        </div>
-    <div id="set" class="top-container__setArray">
-        <form id="differentarrays"> 
-                <!--Difficulty settings-->
-        <div class="display-flex">
-            <label for="game">Select game</label>
-                <select id="game">
-                    <option value="animals">Animals</option>
-                    <option value="planets">Planets and moons</option>
-                    <option value="fruits">Fruits and veggies</option>
-                </select>
-        </div>
+          <div class="display-flex">
+            <label for="difficulty">Difficulty</label>
+            <select id="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
         </form>
-    </div>
+      </div>
+    ` <div id="set" class="top-container__setArray"> 
+      <!-- <form action="dropdown.php" method="POST">
+        <select name='cat' id="cat_select" onChange="outputValue(this)">
+          <option value='animals' id="one">Animals</option>
+          <option value='planets' id="two">Planets</option>
+          <option value='fruits' id="three">Fruits and veggies</option>
+        </select>
+       
+      </form>  -->
+        <form id="differentarrays"> 
+                  <!--Game type settings-->
+          <div class="display-flex">
+            <label>Select game</label>
+              <select class="gamemode" name="games" id="man">
+                <option value="animals" id="one">Animals</option>
+                <option value="planets" id="two">Planets and moons</option>
+                <option value="fruits" id="three">Fruits and veggies</option>
+              </select>
+          </div>
+        </form>
+      </div>
     </div>
     <!--game container-->
-    <section id="game">
+    <section>
         <div class="container">
-            <h2> How fast can you Type</h2>
-            <h5>Type the following:</h5>
+          <h2 id="go"> How fast can you Type</h2>
+          <h5>Type the following:</h5>
 
-            <h1 id="word"></h1>
+          <h1 id="word"></h1>
 
-            <input type="text" id="text" autocomplete="off"
+          <input type="text" id="text" autocomplete="off"
                 placeholder="Catch me.."
-            />
-            <button id="start">Start</button>
-            <p class="time-container">Time left: <span id="time">10s</span></p>
+          />
+          <button id="start">Start</button>
+          <p class="time-container">Time left: <span id="time">10s</span></p>
 
-            <p class="score-container">Score: <span id="score">0</span></p>
+          <p class="score-container">Score: <span id="score">0</span></p>
 
-            <div id="end-game-container" class="end-game-container"></div>
+          <div id="end-game-container" class="end-game-container"></div>
+          <!-- <input type="text" placeholder="Final score" id="dope"> -->
+          <h4>Enter Final score input</h4>
         </div>
     </section>
+    <!--Footer-->
     <footer class="footer">Gaming Inc</footer>
     <script src="app.js"></script>
   </body>
