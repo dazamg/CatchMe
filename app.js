@@ -112,29 +112,7 @@ document.getElementById('start').addEventListener('click', () => {
     const timeInterval = setInterval(updateTime, 1100); 
 })
 
-// const optOne = () => {
-    //     if(optionOne === word.innerText){
-        //         randomWord()
-        //     } else if(optionTwo === word.innerText){
-            //         randomPlanet()
-            //     } else if(optionThree === word.innerText){
-                //         randomWord()
-                //     }
-                // }
-                // // const word = document.getElementById('word')
-                // const getWord = () => {
-                //     if(words.innerText === 'animals') {
-                //         randomWord = randomWords();
-                //         word.innerText = randomWord;
-                //     } else if(words.innerText === 'planets') {
-                //         randomWord = randomPlanets();
-                //         word.innerText = randomWord; 
-                //     } else if(words.innerText === 'fruits') {
-                //         randomWord = randomFruits();
-                //         word.innerText = randomWord; 
-                //     }
-
-                    
+       
 
 //Function to update score
 const scores = document.getElementById('score');
@@ -142,6 +120,8 @@ const addScore = () => {
     score++;
     scores.innerHTML = score;
 }
+
+// function to change arrays to a randomword
 // const getWord = () => {
 //     console.log(mans.value)
 //     if(mans.value === 'animals') {
@@ -156,6 +136,7 @@ const addScore = () => {
 //     }
 // }  
 // getWord()
+
 // match current inputed text with the random word 
 const inputText = () => {
     const text = document.getElementById('text');
@@ -179,6 +160,7 @@ const inputText = () => {
 }
 inputText()
 
+//function to change game mode
 const changeGame = () => {
 
     const selectElement = document.querySelector('.gamemode');                   
@@ -249,3 +231,27 @@ form.addEventListener('change', (e) => {
 //     });
 // }
 // getWord()
+
+// const optOne = () => {
+    //     if(optionOne === word.innerText){
+        //         randomWord()
+        //     } else if(optionTwo === word.innerText){
+            //         randomPlanet()
+            //     } else if(optionThree === word.innerText){
+                //         randomWord()
+                //     }
+                // }
+                // // const word = document.getElementById('word')
+                // const getWord = () => {
+                //     if(words.innerText === 'animals') {
+                //         randomWord = randomWords();
+                //         word.innerText = randomWord;
+                //     } else if(words.innerText === 'planets') {
+                //         randomWord = randomPlanets();
+                //         word.innerText = randomWord; 
+                //     } else if(words.innerText === 'fruits') {
+                //         randomWord = randomFruits();
+                //         word.innerText = randomWord; 
+                //     }
+
+             
