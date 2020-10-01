@@ -5,7 +5,7 @@
   }
   
   body {
-      background: url("./florian-klauer-mk7D-4UCfmg-unsplash.jpg") no-repeat;
+      background: url("./wes-hicks-y3zAmhH34MQ-unsplash.jpg") no-repeat;
       background-size: 100%;
       background-position: top;
       display: flex;
@@ -113,6 +113,7 @@
     padding: 8px;
     border-radius: 4px;
     margin: 0 0 40px;
+    font-family: 'Sansita Swashed', cursive;
   }
   
   h1 {
@@ -159,4 +160,29 @@
       color: yellow;
       text-align: center;
   }
+ #start {
+  background-image: url(./aykut-eke-dR4yIGpkEy8-unsplash.jpg);
+ 
+  background-repeat: no-repeat;
+   
+  background-size: cover;
+   
+ 
   
+   
+  color: transparent; /* Hide the 'submit' text */
+   
+  border: none; /* Remove the border */
+ }
+
+ .final-score {
+   left: 50%;
+   transform: ;
+   font-size: 11px;
+   font-family: 'Lato';
+   text-align: center;
+   padding: 5px;
+   width: 168px;
+   text-transform: uppercase;
+ }
+ .final-score:focus { outline: none;}

@@ -23,6 +23,9 @@ const fvWords = [ 'banana', 'carrot', 'spinach', 'orange', 'mango', 'grapes', 's
 ]
 
 
+let input = document.querySelector('.final-score').value;
+console.log(input)
+
 // const settings = document.getElementById('settings');
 let mans = document.getElementById('man')
 // let optionTwo = document.getElementById('two')
@@ -169,7 +172,6 @@ const changeGame = () => {
         if(event.target.value === 'animals') {
             randomWord = randomWords();
             word.innerText = randomWord;
-            
         } else if(event.target.value === 'planets') {
             randomWord = randomPlanet();
             word.innerText = randomWord;
@@ -178,6 +180,7 @@ const changeGame = () => {
             randomWord = randomFruits();
             word.innerText = randomWord;
         }
+        
     });
 }
 changeGame()
