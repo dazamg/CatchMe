@@ -24,8 +24,18 @@ const fvWords = [ 'banana', 'carrot', 'spinach', 'orange', 'mango', 'grapes', 's
 
 const bigWord = document.getElementById('word')
 
+// const spellcheck = () => {
+//     let textEntered = textEnter.value;
+//     let originTextMatch = bigWord.substring(0, textEntered.length);
+//     if(textEntered === bigWord) {
+//         text.style.borderColor = 'red';
+//     } else {
+//         time -= 4;
+//     }
+// }
+// 
+
 let input = document.querySelector('.final-score').value;
-console.log(input)
 
 // const settings = document.getElementById('settings');
 let mans = document.getElementById('man')
@@ -76,6 +86,120 @@ const randomFruits = () => {
 }
 
 const endGame = document.getElementById('end-game-container');
+
+
+       
+
+//Function to update score
+const scores = document.getElementById('score');
+const addScore = () => {
+    score++;
+    scores.innerHTML = score;
+}
+
+//function to change game mode
+const changeGame = () => {
+    const selectElement = document.querySelector('.gamemode');                   
+    selectElement.addEventListener('change', (event) => {
+        const result = document.getElementById('word');
+        
+        if(event.target.value === 'animals') {
+            // randomWord = randomWords();
+            bigWord.innerHTML = randomWord;
+            
+            
+            
+        } else if(event.target.value === 'planets') {
+            bigWord.innerHTML = planetArray;
+            
+            
+        } else if(event.target.value === 'fruits') {
+            bigWord.innerHTML = fruitArray;
+            
+        }
+        
+    });
+}
+changeGame()
+
+// function to change arrays to a randomword
+const animalWord = (changeGame) => {
+        randomWord = randomWords();
+       word.innerText = randomWord;
+ }  
+animalWord()
+const planetWord = (changeGame) => {
+    
+    planetArray = randomPlanet();
+    word.innerText = planetArray;
+}
+planetWord()
+const fruitWord = (changeGame) => {
+    fruitArray = randomFruits();
+    word.innerText = fruitArray;   
+}
+fruitWord()
+// match current inputed text with the random word 
+const textEnter = document.getElementById('text');
+const inputText = () => {
+    textEnter.addEventListener('input', (e) => {
+        const insertedText = e.target.value;
+        if(insertedText === randomWord) {  
+            
+            animalWord(); 
+            addScore();
+            //Need to clear the text after it has been written to continue playing
+            e.target.value = '';
+            if(difficulty === 'hard') {
+                time += 2;
+            } else if(difficulty === 'medium') {
+                time +=3;
+            } else {
+                time += 5;
+            } 
+        }
+        if(insertedText === fruitArray) {
+            randomFruits() 
+            addScore();
+            //Need to clear the text after it has been written to continue playing
+            e.target.value = '';
+            if(difficulty === 'hard') {
+                time += 2;
+            } else if(difficulty === 'medium') {
+                time +=3;
+            } else {
+                time += 5;
+            } 
+        }
+        if(insertedText === planetArray){
+            planetWord() 
+            addScore();
+            //Need to clear the text after it has been written to continue playing
+            e.target.value = '';
+            if(difficulty === 'hard') {
+                time += 2;
+            } else if(difficulty === 'medium') {
+                time +=3;
+            } else {
+                time += 5;
+            } 
+        }
+
+    })
+}
+inputText()
+
+
+
+
+//
+const form = document.getElementById('settings-form');
+form.addEventListener('change', (e) => {
+    difficulty = e.target.value;
+    localStorage.setItem('difficulty', difficulty);
+});
+
+
 //function to finish and reset game
 const finish = () => {
     if(score <= 7) {
@@ -102,116 +226,26 @@ const finish = () => {
     }
     endGame.style.display = 'flex';
 }
+
+
 // start game function
 
 document.getElementById('start').addEventListener('click', () => {
-//Timer
-//setInterval allows user to run a specific function
-//In this case i need my time to be updated
-    const timeLimit = document.getElementById('time');
-    const updateTime = () => {
-        time--;
-        timeLimit.innerHTML = time + 's';
-        //the time is running pass 0 so i need a condition to start and reset the time
-        if(time === 0) {
-            clearInterval(timeInterval);
-            finish();
+    //Timer
+    //setInterval allows user to run a specific function
+    //In this case i need my time to be updated
+        const timeLimit = document.getElementById('time');
+        const updateTime = () => {
+            time--;
+            timeLimit.innerHTML = time + 's';
+            //the time is running pass 0 so i need a condition to start and reset the time
+            if(time === 0) {
+                clearInterval(timeInterval);
+                finish()
+            }
         }
-    }
-    const timeInterval = setInterval(updateTime, 1100); 
-})
-
-       
-
-//Function to update score
-const scores = document.getElementById('score');
-const addScore = () => {
-    score++;
-    scores.innerHTML = score;
-}
-
-// function to change arrays to a randomword
- const animalWord = () => {
-        randomWord = randomWords();
-       word.innerText = randomWord;
- }  
-animalWord()
-const planetWord = () => {
-    planetArray = randomPlanet();
-    word.innerText = planetArray;
-}
-planetWord()
-const fruitWord = () => {
-    fruitArray = randomFruits();
-    word.innerText = fruitArray;
-}
-fruitWord()
-// match current inputed text with the random word 
-const textEnter = document.getElementById('text');
-const inputText = () => {
-    textEnter.addEventListener('input', (e) => {
-        const insertedText = e.target.value;
-        if(insertedText === randomWord || insertedText === fruitArray || insertedText === planetArray) {     
-            animalWord()
-            fruitWord()
-            planetWord()
-            addScore();
-            //Need to clear the text after it has been written to continue playing
-            e.target.value = '';
-            if(difficulty === 'hard') {
-                time += 2;
-            } else if(difficulty === 'medium') {
-                time +=3;
-            } else {
-                time += 5;
-            } 
-        }
-
+        const timeInterval = setInterval(updateTime, 1100); 
     })
-}
-inputText()
-
-//function to change game mode
-const changeGame = () => {
-    debugger
-    const selectElement = document.querySelector('.gamemode');                   
-    selectElement.addEventListener('change', (event) => {
-        const result = document.getElementById('word');
-        
-        if(event.target.value === 'animals') {
-            // randomWord = randomWords();
-            bigWord.innerHTML = randomWord;
-            inputText()
-            
-            
-        } else if(event.target.value === 'planets') {
-            bigWord.innerHTML = planetArray;
-            inputText()
-            
-        } else if(event.target.value === 'fruits') {
-            bigWord.innerHTML = fruitArray;
-            inputText()
-        }
-        
-    });
-}
-changeGame()
-
-
-//
-const form = document.getElementById('settings-form');
-form.addEventListener('change', (e) => {
-    difficulty = e.target.value;
-    localStorage.setItem('difficulty', difficulty);
-});
-
-const spellcheck = () => {
-    let textEntered = textEnter.value;
-    let originTextMatch = bigWord.substring()(0, textEntered.length);
-}
-
-
-
 
 
 // const newArray = document.getElementById('differentarrays');

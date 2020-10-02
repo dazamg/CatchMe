@@ -162,17 +162,17 @@
   }
  #start {
   background-image: url(./aykut-eke-dR4yIGpkEy8-unsplash.jpg);
- 
   background-repeat: no-repeat;
-   
   background-size: cover;
-   
- 
-  
-   
-  color: transparent; /* Hide the 'submit' text */
-   
-  border: none; /* Remove the border */
+  color: transparent; /* Hide the 'submit' text */  
+  border-radius: 1rem;
+ }
+ #start:focus {
+   color: #ff0000
+ }
+ #two {
+   border-radius: 1rem;
+   font-family: 'Sansita Swashed', cursive;
  }
 
  .final-score {
