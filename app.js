@@ -59,7 +59,7 @@ localStorage.getItem('difficulty') : 'medium';
 // localStorage.getItem('man') !== null ?
 // localStorage.getItem('man') : 'planets';
 
-// Variable for random word
+// Variable for game Modes
 let randomWord;
 let fruitArray;
 let planetArray;
@@ -72,6 +72,8 @@ let score = 0;
 
 //Variable for current player
 let currentplayer;
+//variable for rounds
+let roundScore = 0;
 
 //function to return a random Animal
 const randomWords = () => {
@@ -203,23 +205,24 @@ form.addEventListener('change', (e) => {
 //function to finish and reset game
 const finish = () => {
     if(score <= 7) {
+        // endGame.style.background = "red";
         endGame.innerHTML = `
-        <h1>You lost your rabbit</h1>
-        <p>Your final score is ${score}</p>
-        <img src='https://i.imgur.com/XmdVia6.gif' >
+        <h1>${currentplayer} you lost your rabbit</h1>
+        <p>${currentplayer} final score is ${score}</p>
+        <img src='https://i.imgur.com/XmdVia6.gif' width= '35%' height= '65%'>
         <button onclick='location.reload()'>Reload</button>
         `; 
     }
     else if(score > 7 || score <= 12) {
         endGame.innerHTML = `
-        <h1>You an All Star</h1>
-        <p>Your final score is ${score}</p>
+        <h1>${currentplayer} you an All Star</h1>
+        <p>${currentplayer} final score is ${score}</p>
         <img src='https://p0.pikist.com/photos/929/976/dog-laptop-computer-glasses-spectacles-office-desk-pet-business.jpg' width= '40%' height= '60%'>
         <button onclick='location.reload()'>Reload</button>
         `; 
     } else {
-        `<h1>You the Best</h1>
-        <p>Your final score is ${score}</p>
+        `<h1>${currentplayer} you the Best</h1>
+        <p>${currentplayer} final score is ${score}</p>
         <img src=''>
         <button onclick='location.reload()'>Reload</button>
         `;
