@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap');
 * {
     box-sizing: border-box;
-
   }
   
   body {
@@ -170,7 +169,7 @@
  #start:focus {
    color: #ff0000
  }
- #two {
+ #player {
    border-radius: 1rem;
    font-family: 'Sansita Swashed', cursive;
  }

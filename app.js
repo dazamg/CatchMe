@@ -23,6 +23,7 @@ const fvWords = [ 'banana', 'carrot', 'spinach', 'orange', 'mango', 'grapes', 's
 ]
 
 const bigWord = document.getElementById('word')
+const differentPlayers = document.querySelector('.switch')
 
 // const spellcheck = () => {
 //     let textEntered = textEnter.value;
@@ -35,7 +36,7 @@ const bigWord = document.getElementById('word')
 // }
 // 
 
-let input = document.querySelector('.final-score').value;
+let input = document.querySelector('.final-score');
 
 // const settings = document.getElementById('settings');
 let mans = document.getElementById('man')
@@ -69,8 +70,8 @@ let time = 11;
 //Variable for score
 let score = 0;
 
-//Game to keep playing
-let continuePlaying;
+//Variable for current player
+let currentplayer;
 
 //function to return a random Animal
 const randomWords = () => {
@@ -145,7 +146,6 @@ const inputText = () => {
     textEnter.addEventListener('input', (e) => {
         const insertedText = e.target.value;
         if(insertedText === randomWord) {  
-            
             animalWord(); 
             addScore();
             //Need to clear the text after it has been written to continue playing
@@ -206,7 +206,7 @@ const finish = () => {
         endGame.innerHTML = `
         <h1>You lost your rabbit</h1>
         <p>Your final score is ${score}</p>
-        <img src='https://i.imgur.com/XmdVia6.gif' height= '80%'>
+        <img src='https://i.imgur.com/XmdVia6.gif' >
         <button onclick='location.reload()'>Reload</button>
         `; 
     }
@@ -229,23 +229,45 @@ const finish = () => {
 
 
 // start game function
+const timeLimit = document.getElementById('time');
+
 
 document.getElementById('start').addEventListener('click', () => {
-    //Timer
+    currentplayer = 'Player One';
+    differentPlayers.textContent = 'Player One';
+    differentPlayers.style.color = 'red';
+            //Timer
     //setInterval allows user to run a specific function
     //In this case i need my time to be updated
-        const timeLimit = document.getElementById('time');
-        const updateTime = () => {
-            time--;
-            timeLimit.innerHTML = time + 's';
-            //the time is running pass 0 so i need a condition to start and reset the time
-            if(time === 0) {
-                clearInterval(timeInterval);
-                finish()
-            }
+    const updateTime = () => {
+        time--;
+        timeLimit.innerHTML = time + 's';
+        //the time is running pass 0 so i need a condition to start and reset the time
+        if(time === 0) {
+            clearInterval(timeInterval);
+            finish()
         }
-        const timeInterval = setInterval(updateTime, 1100); 
-    })
+    }
+    const timeInterval = setInterval(updateTime, 1100); 
+
+})
+
+document.getElementById('player').addEventListener('click', () => {
+    currentplayer = 'Player Two';
+    differentPlayers.textContent = 'Player Two';
+    differentPlayers.style.color = 'red';
+    const newTime = () => {
+        time--;
+        timeLimit.innerHTML = time + 's';
+        //the time is running pass 0 so i need a condition to start and reset the time
+        if(time === 0) {
+            clearInterval(newInterval);
+            finish()
+        }
+    }
+    const newInterval = setInterval(newTime, 1100); 
+})
+
 
 
 // const newArray = document.getElementById('differentarrays');
@@ -253,55 +275,4 @@ document.getElementById('start').addEventListener('click', () => {
 //     games = e.target.value;
 //     localStorage.setItem('cldd', games);
 // }); 
-//     if(optionOne.value === 'animals') {
-        // randomWord = randomWords();
-        // word.innerHTML = randomWord;
-//     } else if(optionTwo.value === 'planets') {
-//             randomWord = randomPlanet();
-//              word.innerHTML = randomWord;
-//         } else if(optionTwo.value === 'fruits') {
-//             randomWord = randomPlanet();
-//             word.innerHTML = randomWord;
-//         }       
-//  }
 
-// const getWord = () => {
-
-//     const selectElement = document.querySelector('.gamemode');                   
-//     selectElement.addEventListener('change', (event) => {
-//         const result = document.getElementById('word');
-//         if(event.target.value === 'animals') {
-//             randomWord = randomWords();
-//             result.textContent = randomWord;
-//         } else if(event.target.value === 'planets') {
-//             randomWord = randomPlanet();
-//             word.innerText = randomWord;
-//         } else if(event.target.value === 'fruits') {
-//             randomWord = randomFruits();
-//             word.innerText = randomWord;;
-//         }
-//     });
-// }
-// getWord()
-
-// const optOne = () => {
-    //     if(optionOne === word.innerText){
-        //         randomWord()
-        //     } else if(optionTwo === word.innerText){
-            //         randomPlanet()
-            //     } else if(optionThree === word.innerText){
-                //         randomWord()
-                //     }
-                // }
-                // // const word = document.getElementById('word')
-                // const getWord = () => {
-                //     if(words.innerText === 'animals') {
-                //         randomWord = randomWords();
-                //         word.innerText = randomWord;
-                //     } else if(words.innerText === 'planets') {
-                //         randomWord = randomPlanets();
-                //         word.innerText = randomWord; 
-                //     } else if(words.innerText === 'fruits') {
-                //         randomWord = randomFruits();
-                //         word.innerText = randomWord; 
-                //     }
