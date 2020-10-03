@@ -32,6 +32,7 @@ const scores = document.getElementById('score');
 const selectElement = document.querySelector('.gamemode');
 const form = document.getElementById('settings-form');
 let input = document.querySelector('.final-score').value;
+let newInterval, timeInterval;
 
 
 // const settings = document.getElementById('settings');
@@ -120,8 +121,9 @@ const changeGame = () => {
 
 //function to change arrays to a randomword
 const animalWord = (changeGame) => {
-        randomWord = randomWords();
-       word.innerText = randomWord;
+    console.log("running animalWord")
+    randomWord = randomWords();
+    word.innerText = randomWord;
  }  
 
 const planetWord = (changeGame) => {
@@ -131,6 +133,7 @@ const planetWord = (changeGame) => {
 }
 
 const fruitWord = (changeGame) => {
+    console.log("running fruitWord")
     fruitArray = randomFruits();
     word.innerText = fruitArray;   
 }
@@ -142,6 +145,7 @@ const inputText = () => {
     textEnter.addEventListener('input', (e) => {
         const insertedText = e.target.value;
         if(insertedText === randomWord) {  
+            console.log("animal if")
             animalWord(); 
             addScore();
             //Need to clear the text after it has been written to continue playing
@@ -155,8 +159,8 @@ const inputText = () => {
             } 
         }
         if(insertedText === fruitArray) {
-            console.log('kkk')
-            randomFruits() 
+            console.log('fruit if')
+            fruitWord()
             addScore();
             //Need to clear the text after it has been written to continue playing
             e.target.value = '';
@@ -184,10 +188,6 @@ const inputText = () => {
 
     })
 }
-
-
-
-
 
 //Event listener to change game mode
 
@@ -234,6 +234,26 @@ const finish = () => {
 }
 
 
+const updateTime = () => {
+    time--;
+    timeLimit.innerHTML = time + 's';
+    //the time is running pass 0 so i need a condition to start and reset the time
+    if(time === 0) {
+        clearInterval(timeInterval);
+        finish()
+    }
+}
+
+const newTime = () => {
+    time--;
+    timeLimit.innerHTML = time + 's';
+    //the time is running pass 0 so i need a condition to start and reset the time
+    if(time === 0) {
+        clearInterval(newInterval);
+        finish()
+    }
+}
+
 // start game button
 document.getElementById('start').addEventListener('click', () => {
     currentplayer = 'Player One';
@@ -243,36 +263,16 @@ document.getElementById('start').addEventListener('click', () => {
     //Timer
     //setInterval allows user to run a specific function
     //In this case i need my time to be updated
-    const updateTime = () => {
-        time--;
-        timeLimit.innerHTML = time + 's';
-        //the time is running pass 0 so i need a condition to start and reset the time
-        if(time === 0) {
-            clearInterval(timeInterval);
-            finish()
-            
-        }
-    }
-    const timeInterval = setInterval(updateTime, 1100); 
+    timeInterval = setInterval(updateTime, 1100); 
 
 })
 
 // start game button for playerTwo
 document.getElementById('player').addEventListener('click', () => {
-
     currentplayer = 'Player Two';
     differentPlayers.textContent = 'Player Two';
     differentPlayers.style.color = 'red';
-    const newTime = () => {
-        time--;
-        timeLimit.innerHTML = time + 's';
-        //the time is running pass 0 so i need a condition to start and reset the time
-        if(time === 0) {
-            clearInterval(newInterval);
-            finish()
-        }
-    }
-    const newInterval = setInterval(newTime, 1100); 
+    newInterval = setInterval(newTime, 1100); 
 })
 
 changeGame()
