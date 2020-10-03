@@ -35,8 +35,8 @@ let input = document.querySelector('.final-score').value;
 let newInterval, timeInterval;
 
 
-// const settings = document.getElementById('settings');
-let mans = document.getElementById('man')
+const settings = document.getElementById('settings');
+let mans = document.getElementById('man');
 // let optionTwo = document.getElementById('two')
 // let optionThree = document.getElementById('three')
 // console.log(optionTwo.value)
@@ -48,13 +48,13 @@ diffSelect.value =
 localStorage.getItem('difficulty') !== null ?
 localStorage.getItem('difficulty') : 'medium';
 
-// const gameType = document.getElementById('man');
-// let mans = localStorage.getItem('man') !== null ?
-// localStorage.getItem('man') : 'planets';
+const gameType = document.getElementById('modes');
+let modes = localStorage.getItem('modes') !== null ?
+localStorage.getItem('modes') : 'animal';
 
-// gameType.value = 
-// localStorage.getItem('man') !== null ?
-// localStorage.getItem('man') : 'planets';
+gameType.value = 
+localStorage.getItem('modes') !== null ?
+localStorage.getItem('modes') : 'animal';
 
 // Variable for game Modes
 let randomWord;
@@ -69,9 +69,43 @@ let score = 0;
 
 //Variable for current player
 let currentplayer;
-// let lastPlayer;
+let gamePlay;
 //variable for rounds
 let roundScore = 0;
+
+// let errors_text = document.querySelector('final-score')
+// let total_errors = 0;
+// let errors = 0;
+// characterTyped;
+
+// const errorPenalty = () => {
+    //get current input
+    // let curr_input = textEnter.value;
+    // let curr_input.array = curr_input.split('');
+
+    // characterTyped++;
+
+    // errors = 0;
+
+    // let charSpanArray = bigWord.querySelectorAll('span')
+
+    // //loop through the span elements
+    // charSpanArray.forEach((char. index) => {
+    //     let typedChar = curr_input[index];
+
+    //    // characters currently not typed 
+    //    if(typedChar = null) {
+
+    //    } typedChar === char.innerText {
+
+    //    } else {
+
+    //    }
+    // })
+
+// }
+
+
 
 //function to return a random Animal
 const randomWords = () => {
@@ -100,7 +134,6 @@ const changeGame = () => {
         const result = document.getElementById('word');
         
         if(event.target.value === 'animals') {
-            // randomWord = randomWords();
             bigWord.innerHTML = randomWord;
                       
         } else if(event.target.value === 'planets') {
@@ -119,16 +152,19 @@ const changeGame = () => {
 const animalWord = (changeGame) => {
     randomWord = randomWords();
     word.innerText = randomWord;
+    
  }  
 
 const planetWord = (changeGame) => {
     planetArray = randomPlanet();
     word.innerText = planetArray;
+    
 }
 
 const fruitWord = (changeGame) => {
     fruitArray = randomFruits();
-    word.innerText = fruitArray;   
+    word.innerText = fruitArray; 
+     
 }
 
 
@@ -175,12 +211,9 @@ const inputText = () => {
             } else {
                 time += 5;
             } 
-        }
-
+        } 
     })
 }
-
-//Event listener to change game mode
 
 form.addEventListener('change', (e) => {
     difficulty = e.target.value;
@@ -188,90 +221,103 @@ form.addEventListener('change', (e) => {
 });
 
 
-//function to finish and reset game
-const finish = () => {
-    if(score <= 7) {
-        roundScore = score;
-        endGame.innerHTML = `
-        <h1>${currentplayer} you lost your rabbit</h1>
-        <p>${currentplayer} final score is ${score}</p>
-        <img src='images/lucy-m-KNMbRhf5IT8-unsplash.jpg' width= '35%' height= '65%'>
-        <button onclick='location.reload()'>Reload</button>
-        `; 
-    }
-    else if(score > 7 || score <= 12) {
-        endGame.innerHTML = `
-        <h1>${currentplayer} you an All Star</h1>
-        <p>${currentplayer} final score is ${score}</p>
-        <img src='https://p0.pikist.com/photos/929/976/dog-laptop-computer-glasses-spectacles-office-desk-pet-business.jpg' width= '40%' height= '60%'>
-        <button onclick='location.reload()'>Reload</button>
 
-        `; 
-    } else {
-        `<h1>${currentplayer} you the Best</h1>
-        <p>${currentplayer} final score is ${score}</p>
-        <img src=''>
+
+document.addEventListener('DOMContentLoaded', () => {
+    //function to finish and reset game
+      
+    const finish = () => {
+        if(score <= 7) {
+            roundScore = score;
+            endGame.innerHTML = `
+            <h1>${currentplayer} you lost your rabbit</h1>
+            <p>${currentplayer} final score is ${score}</p>
+            <img src='images/lucy-m-KNMbRhf5IT8-unsplash.jpg' width= '35%' height= '65%'>
+            <button onclick='location.reload()'>Reload</button>
+            `; 
+        }
+        else if(score > 7 || score <= 12) {
+            endGame.innerHTML = `
+            <h1>${currentplayer} you an All Star</h1>
+            <p>${currentplayer} final score is ${score}</p>
+            <img src='https://p0.pikist.com/photos/929/976/dog-laptop-computer-glasses-spectacles-office-desk-pet-business.jpg' width= '40%' height= '60%'>
+            <button onclick='location.reload()'>Reload</button>
+    
+            `; 
+        } else {
+            `<h1>${currentplayer} you the Best</h1>
+            <p>${currentplayer} final score is ${score}</p>
+            <img src=''>
+            <button onclick='location.reload()'>Reload</button>
+            `;
+        }
+        
+        endGame.style.display = 'flex';
+    }
+
+    // start game button
+    document.getElementById('start').addEventListener('click', () => {
+        currentplayer = 'Player One';
+        differentPlayers.textContent = 'Player One';
+        differentPlayers.style.color = 'red';  
+        //Timer
+        //setInterval allows user to run a specific function
+        //In this case i need my time to be updated
+        const updateTime = () => {
+            time--;
+            timeLimit.innerHTML = time + 's';
+            //the time is running pass 0 so i need a condition to start and reset the time
+            if(time === 0) {
+                clearInterval(timeInterval);
+                finish()
+            }
+        }
+        timeInterval = setInterval(updateTime, 1100); 
+    })
+    
+    // start game button for playerTwo
+    document.getElementById('player').addEventListener('click', () => {
+        currentplayer = 'Player Two';
+        differentPlayers.textContent = 'Player Two';
+        differentPlayers.style.color = 'red';
+        const newTime = () => {
+            time--;
+            timeLimit.innerHTML = time + 's';
+            //the time is running pass 0 so i need a condition to start and reset the time
+            if(time === 0) {
+                clearInterval(newInterval);
+                finish()
+            }
+        }
+        newInterval = setInterval(newTime, 1100); 
+    })
+    
+    //Instructions button
+    const instructions = document.getElementById('rules')
+    document.getElementById('rules').addEventListener('click', () => {
+        instructions.innerHTML = `
+        <p> <br>Difficulty</br>
+        <br>-  Easy- 5 seconds added to every correct word spelled.</br>
+        
+        <br>-  Meduim- 3 seconds added to every correct word spelled.</br>
+        
+        <br>-  Hard - 2 seconds added to every correct word spelled.</br> 
+        </p>
         <button onclick='location.reload()'>Reload</button>
         `;
-    }
-    
-    endGame.style.display = 'flex';
-}
-
-
-
-
-
-
-// start game button
-document.getElementById('start').addEventListener('click', () => {
-    currentplayer = 'Player One';
-    differentPlayers.textContent = 'Player One';
-    differentPlayers.style.color = 'red';  
-    //Timer
-    //setInterval allows user to run a specific function
-    //In this case i need my time to be updated
-    const updateTime = () => {
-        time--;
-        timeLimit.innerHTML = time + 's';
-        //the time is running pass 0 so i need a condition to start and reset the time
-        if(time === 0) {
-            clearInterval(timeInterval);
-            finish()
-        }
-    }
-    timeInterval = setInterval(updateTime, 1100); 
+    })
 })
 
-// start game button for playerTwo
-document.getElementById('player').addEventListener('click', () => {
-    currentplayer = 'Player Two';
-    differentPlayers.textContent = 'Player Two';
-    differentPlayers.style.color = 'red';
-    const newTime = () => {
-        time--;
-        timeLimit.innerHTML = time + 's';
-        //the time is running pass 0 so i need a condition to start and reset the time
-        if(time === 0) {
-            clearInterval(newInterval);
-            finish()
-        }
-    }
-    newInterval = setInterval(newTime, 1100); 
+
+
+form.addEventListener('change', (e) => {
+  difficulty = e.target.value;
+   localStorage.setItem('difficulty', difficulty);
 })
 
-const instructions = document.getElementById('rules')
-document.getElementById('rules').addEventListener('click', () => {
-    instructions.innerHTML = `
-    <p> <br>Difficulty</br>
-    <br>-  Easy- 5 seconds added to every correct word spelled.</br>
-    
-    <br>-  Meduim- 3 seconds added to every correct word spelled.</br>
-    
-    <br>-  Hard - 2 seconds added to every correct word spelled.</br> 
-    </p>
-    <button onclick='location.reload()'>Reload</button>
-    `;
+form.addEventListener('change', (e) => {
+    difficulty = e.target.value;
+     localStorage.setItem('modes', modes);
 })
 
 
