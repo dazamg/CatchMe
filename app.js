@@ -22,21 +22,17 @@ const fvWords = [ 'banana', 'carrot', 'spinach', 'orange', 'mango', 'grapes', 's
     'mushroom', 'pepper', 'pumpkin'
 ]
 
+            
 const bigWord = document.getElementById('word')
 const differentPlayers = document.querySelector('.switch')
+const endGame = document.getElementById('end-game-container');
+const timeLimit = document.getElementById('time');
+const textEnter = document.getElementById('text');
+const scores = document.getElementById('score');
+const selectElement = document.querySelector('.gamemode');
+const form = document.getElementById('settings-form');
+let input = document.querySelector('.final-score').value;
 
-// const spellcheck = () => {
-//     let textEntered = textEnter.value;
-//     let originTextMatch = bigWord.substring(0, textEntered.length);
-//     if(textEntered === bigWord) {
-//         text.style.borderColor = 'red';
-//     } else {
-//         time -= 4;
-//     }
-// }
-// 
-
-let input = document.querySelector('.final-score');
 
 // const settings = document.getElementById('settings');
 let mans = document.getElementById('man')
@@ -72,6 +68,7 @@ let score = 0;
 
 //Variable for current player
 let currentplayer;
+// let pastPlayer;
 //variable for rounds
 let roundScore = 0;
 
@@ -88,13 +85,8 @@ const randomFruits = () => {
     return fvWords[Math.floor(Math.random() * fvWords.length)];    
 }
 
-const endGame = document.getElementById('end-game-container');
-
-
-       
 
 //Function to update score
-const scores = document.getElementById('score');
 const addScore = () => {
     score++;
     scores.innerHTML = score;
@@ -102,7 +94,7 @@ const addScore = () => {
 
 //function to change game mode
 const changeGame = () => {
-    const selectElement = document.querySelector('.gamemode');                   
+                       
     selectElement.addEventListener('change', (event) => {
         const result = document.getElementById('word');
         
@@ -112,38 +104,40 @@ const changeGame = () => {
             
             
             
+            
         } else if(event.target.value === 'planets') {
             bigWord.innerHTML = planetArray;
             
             
-        } else if(event.target.value === 'fruits') {
+        } else {
             bigWord.innerHTML = fruitArray;
             
         }
         
     });
 }
-changeGame()
 
-// function to change arrays to a randomword
+
+//function to change arrays to a randomword
 const animalWord = (changeGame) => {
         randomWord = randomWords();
        word.innerText = randomWord;
  }  
-animalWord()
+
 const planetWord = (changeGame) => {
     
     planetArray = randomPlanet();
     word.innerText = planetArray;
 }
-planetWord()
+
 const fruitWord = (changeGame) => {
     fruitArray = randomFruits();
     word.innerText = fruitArray;   
 }
-fruitWord()
+
+
 // match current inputed text with the random word 
-const textEnter = document.getElementById('text');
+
 const inputText = () => {
     textEnter.addEventListener('input', (e) => {
         const insertedText = e.target.value;
@@ -161,6 +155,7 @@ const inputText = () => {
             } 
         }
         if(insertedText === fruitArray) {
+            console.log('kkk')
             randomFruits() 
             addScore();
             //Need to clear the text after it has been written to continue playing
@@ -189,27 +184,34 @@ const inputText = () => {
 
     })
 }
-inputText()
 
 
 
 
-//
-const form = document.getElementById('settings-form');
+
+//Event listener to change game mode
+
 form.addEventListener('change', (e) => {
     difficulty = e.target.value;
     localStorage.setItem('difficulty', difficulty);
 });
 
+//function to check for a winner
+// const winnerStatus = () => {
+//     if(score(currentplayer) > score(pastPlayer)) {
+//         endGame.textContent = 'Winner';
+//     } else {
+//         endGame.textContent = 'Draw';
+//     } 
+// }
 
 //function to finish and reset game
 const finish = () => {
     if(score <= 7) {
-        // endGame.style.background = "red";
         endGame.innerHTML = `
         <h1>${currentplayer} you lost your rabbit</h1>
         <p>${currentplayer} final score is ${score}</p>
-        <img src='https://i.imgur.com/XmdVia6.gif' width= '35%' height= '65%'>
+        <img src='images/lucy-m-KNMbRhf5IT8-unsplash.jpg' width= '35%' height= '65%'>
         <button onclick='location.reload()'>Reload</button>
         `; 
     }
@@ -227,19 +229,18 @@ const finish = () => {
         <button onclick='location.reload()'>Reload</button>
         `;
     }
+    
     endGame.style.display = 'flex';
 }
 
 
-// start game function
-const timeLimit = document.getElementById('time');
-
-
+// start game button
 document.getElementById('start').addEventListener('click', () => {
     currentplayer = 'Player One';
     differentPlayers.textContent = 'Player One';
-    differentPlayers.style.color = 'red';
-            //Timer
+    differentPlayers.style.color = 'red';  
+    // pastPlayer = 'Player One';
+    //Timer
     //setInterval allows user to run a specific function
     //In this case i need my time to be updated
     const updateTime = () => {
@@ -249,13 +250,16 @@ document.getElementById('start').addEventListener('click', () => {
         if(time === 0) {
             clearInterval(timeInterval);
             finish()
+            
         }
     }
     const timeInterval = setInterval(updateTime, 1100); 
 
 })
 
+// start game button for playerTwo
 document.getElementById('player').addEventListener('click', () => {
+
     currentplayer = 'Player Two';
     differentPlayers.textContent = 'Player Two';
     differentPlayers.style.color = 'red';
@@ -271,6 +275,11 @@ document.getElementById('player').addEventListener('click', () => {
     const newInterval = setInterval(newTime, 1100); 
 })
 
+changeGame()
+animalWord()
+planetWord()
+inputText()
+fruitWord()
 
 
 // const newArray = document.getElementById('differentarrays');
@@ -279,3 +288,13 @@ document.getElementById('player').addEventListener('click', () => {
 //     localStorage.setItem('cldd', games);
 // }); 
 
+// const spellcheck = () => {
+    //     let textEntered = textEnter.value;
+    //     let originTextMatch = bigWord.substring(0, textEntered.length);
+    //     if(textEntered === bigWord) {
+        //         text.style.borderColor = 'red';
+        //     } else {
+            //         time -= 4;
+            //     }
+            // }
+            // 

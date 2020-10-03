@@ -4,7 +4,7 @@
   }
   
   body {
-      background: url("./wes-hicks-y3zAmhH34MQ-unsplash.jpg") no-repeat;
+      background: url("./images/wes-hicks-y3zAmhH34MQ-unsplash.jpg") no-repeat;
       background-size: 100%;
       background-position: top;
       display: flex;
@@ -167,7 +167,7 @@ background-image: linear-gradient(132deg, #F4D03F 0%, #16A085 100%);
       text-align: center;
   }
  #start {
-  background-image: url(./aykut-eke-dR4yIGpkEy8-unsplash.jpg);
+  background-image: url(./images/aykut-eke-dR4yIGpkEy8-unsplash.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   color: transparent; /* Hide the 'submit' text */  
