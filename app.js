@@ -38,12 +38,12 @@ const scores = document.getElementById('score');
 const selectElement = document.querySelector('.gamemode');
 const form = document.getElementById('settings-form');
 let input = document.querySelector('.final-score').value;
+let mans = document.getElementById('man');
+const settings = document.getElementById('settings');
 let newInterval, timeInterval;
 
 
-const settings = document.getElementById('settings');
-let mans = document.getElementById('man');
-
+//Set the dropdown values to a default option
 const diffSelect = document.getElementById('difficulty');
 let difficulty = localStorage.getItem('difficulty') !== null ?
 localStorage.getItem('difficulty') : 'medium';
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(score <= 7) {
             roundScore = score;
             endGame.innerHTML = `
-            <h1>${currentplayer} you lost your rabbit</h1>
+            <h1>${currentplayer} you out of time and lost your rabbit</h1>
             <p>${currentplayer} final score is ${score}</p>
             <img src='images/lucy-m-KNMbRhf5IT8-unsplash.jpg' width= '35%' height= '65%'>
             <button onclick='location.reload()'>Reload</button>
@@ -273,14 +273,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         else if(score > 7 || score <= 12) {
             endGame.innerHTML = `
-            <h1>${currentplayer} you an All Star</h1>
+            <h1>${currentplayer} you out of time and you're an All Star</h1>
             <p>${currentplayer} final score is ${score}</p>
             <img src='https://p0.pikist.com/photos/929/976/dog-laptop-computer-glasses-spectacles-office-desk-pet-business.jpg' width= '40%' height= '60%'>
             <button onclick='location.reload()'>Reload</button>
     
             `; 
         } else {
-            `<h1>${currentplayer} you the Best</h1>
+            `<h1>${currentplayer} you out of time and you're the Best</h1>
             <p>${currentplayer} final score is ${score}</p>
             <img src=''>
             <button onclick='location.reload()'>Reload</button>

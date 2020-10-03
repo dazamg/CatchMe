@@ -202,6 +202,6 @@ background-image: linear-gradient(132deg, #F4D03F 0%, #16A085 100%);
  Style Mobile
  max-width is use when u working from desktop down
 */
- /* @media screen and (max-width: 300px) {
+ @media screen and (max-width: 600px) {
    background: red !important;
- } */
+ }
