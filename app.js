@@ -21,6 +21,12 @@ const fvWords = [ 'banana', 'carrot', 'spinach', 'orange', 'mango', 'grapes', 's
     'cabbage', 'cucumber', 'potato', 'ginger', 'avocado', 'radish',
     'mushroom', 'pepper', 'pumpkin'
 ]
+// list of countries
+const countries = [
+    'grenada', 'trinidad and tobacco', 'germany', 'russsia', 'brazil', 'france', 'italy', 
+    'united kingdom', 'greece', 'sweden', 'belgium', 'croatia', 'denmark', 'ireland', 
+    'ukraine', 'norway', 'argentina', 'bahamas', 'jamaica', 'puerto rico', 'mexico'
+]
 
             
 const bigWord = document.getElementById('word')
@@ -37,9 +43,7 @@ let newInterval, timeInterval;
 
 const settings = document.getElementById('settings');
 let mans = document.getElementById('man');
-// let optionTwo = document.getElementById('two')
-// let optionThree = document.getElementById('three')
-// console.log(optionTwo.value)
+
 const diffSelect = document.getElementById('difficulty');
 let difficulty = localStorage.getItem('difficulty') !== null ?
 localStorage.getItem('difficulty') : 'medium';
@@ -50,16 +54,17 @@ localStorage.getItem('difficulty') : 'medium';
 
 const gameType = document.getElementById('modes');
 let modes = localStorage.getItem('modes') !== null ?
-localStorage.getItem('modes') : 'animal';
+localStorage.getItem('modes') : 'country';
 
 gameType.value = 
 localStorage.getItem('modes') !== null ?
-localStorage.getItem('modes') : 'animal';
+localStorage.getItem('modes') : 'country';
 
 // Variable for game Modes
 let randomWord;
 let fruitArray;
 let planetArray;
+let countryArray;
 
 //Variable for time
 let time = 11;
@@ -69,21 +74,26 @@ let score = 0;
 
 //Variable for current player
 let currentplayer;
+
+//Variable to determine if the game is playing
 let gamePlay;
 //variable for rounds
 let roundScore = 0;
 
-// let errors_text = document.querySelector('final-score')
-// let total_errors = 0;
-// let errors = 0;
-// characterTyped;
+//variable for error
+let errors = 0;
+
+// I need to continue this after looping through the individual index for the string 
+// let penaltyText = document.querySelector('final-score')
+// let total_penalty = 0;
+// characterEntered;
 
 // const errorPenalty = () => {
     //get current input
-    // let curr_input = textEnter.value;
-    // let curr_input.array = curr_input.split('');
+    // let word_input = textEnter.value;
+    // let word_input.array = word_input.split('');
 
-    // characterTyped++;
+    // characterEntered++;
 
     // errors = 0;
 
@@ -115,11 +125,15 @@ const randomWords = () => {
 const randomPlanet = () => {
     return moonWords[Math.floor(Math.random() * moonWords.length)];    
 }
-//function to return a random fruit or veggie
+//function to return a random fruit or veggies
 const randomFruits = () => {
     return fvWords[Math.floor(Math.random() * fvWords.length)];    
 }
 
+//function to return a random countries
+const randomCountries = () => {
+    return countries[Math.floor(Math.random() * countries.length)];    
+}
 
 //Function to update score
 const addScore = () => {
@@ -138,10 +152,12 @@ const changeGame = () => {
                       
         } else if(event.target.value === 'planets') {
             bigWord.innerHTML = planetArray;      
+             
+        } else if(event.target.value === 'fruits') {
+            bigWord.innerHTML = fruitArray;      
             
-        } else {
-            bigWord.innerHTML = fruitArray;
-            
+        }  else if(event.target.value === 'country'){
+            bigWord.innerHTML = countryArray;
         }
         
     });
@@ -165,6 +181,11 @@ const fruitWord = (changeGame) => {
     fruitArray = randomFruits();
     word.innerText = fruitArray; 
      
+}
+
+const CountryWords = (changeGame) => {
+    countryArray = randomCountries();
+    word.innerText = countryArray; 
 }
 
 
@@ -211,7 +232,21 @@ const inputText = () => {
             } else {
                 time += 5;
             } 
-        } 
+        }
+        if(insertedText === countryArray) {
+            console.log(CountryWords)
+            CountryWords();
+            addScore();
+            //Need to clear the text after it has been written to continue playing
+            e.target.value = '';
+            if(difficulty === 'hard') {
+                time += 2;
+            } else if(difficulty === 'medium') {
+                time +=3;
+            } else {
+                time += 5;
+            } 
+        }
     })
 }
 
@@ -302,6 +337,10 @@ document.addEventListener('DOMContentLoaded', () => {
         <br>-  Meduim- 3 seconds added to every correct word spelled.</br>
         
         <br>-  Hard - 2 seconds added to every correct word spelled.</br> 
+
+
+        <br>        Penalty</br>
+        <br> - 4 seconds remove to every wrong word spelled.</br>
         </p>
         <button onclick='location.reload()'>Reload</button>
         `;
@@ -326,8 +365,12 @@ animalWord()
 planetWord()
 inputText()
 fruitWord()
+CountryWords()
 
 
+// let optionTwo = document.getElementById('two')
+// let optionThree = document.getElementById('three')
+// console.log(optionTwo.value)
 // const newArray = document.getElementById('differentarrays');
 // form.addEventListener('change', (e) => {
 //     games = e.target.value;
