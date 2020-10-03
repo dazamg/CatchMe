@@ -69,7 +69,7 @@ let score = 0;
 
 //Variable for current player
 let currentplayer;
-// let pastPlayer;
+// let lastPlayer;
 //variable for rounds
 let roundScore = 0;
 
@@ -102,13 +102,9 @@ const changeGame = () => {
         if(event.target.value === 'animals') {
             // randomWord = randomWords();
             bigWord.innerHTML = randomWord;
-            
-            
-            
-            
+                      
         } else if(event.target.value === 'planets') {
-            bigWord.innerHTML = planetArray;
-            
+            bigWord.innerHTML = planetArray;      
             
         } else {
             bigWord.innerHTML = fruitArray;
@@ -121,19 +117,16 @@ const changeGame = () => {
 
 //function to change arrays to a randomword
 const animalWord = (changeGame) => {
-    console.log("running animalWord")
     randomWord = randomWords();
     word.innerText = randomWord;
  }  
 
 const planetWord = (changeGame) => {
-    
     planetArray = randomPlanet();
     word.innerText = planetArray;
 }
 
 const fruitWord = (changeGame) => {
-    console.log("running fruitWord")
     fruitArray = randomFruits();
     word.innerText = fruitArray;   
 }
@@ -145,7 +138,6 @@ const inputText = () => {
     textEnter.addEventListener('input', (e) => {
         const insertedText = e.target.value;
         if(insertedText === randomWord) {  
-            console.log("animal if")
             animalWord(); 
             addScore();
             //Need to clear the text after it has been written to continue playing
@@ -159,7 +151,6 @@ const inputText = () => {
             } 
         }
         if(insertedText === fruitArray) {
-            console.log('fruit if')
             fruitWord()
             addScore();
             //Need to clear the text after it has been written to continue playing
@@ -196,18 +187,11 @@ form.addEventListener('change', (e) => {
     localStorage.setItem('difficulty', difficulty);
 });
 
-//function to check for a winner
-// const winnerStatus = () => {
-//     if(score(currentplayer) > score(pastPlayer)) {
-//         endGame.textContent = 'Winner';
-//     } else {
-//         endGame.textContent = 'Draw';
-//     } 
-// }
 
 //function to finish and reset game
 const finish = () => {
     if(score <= 7) {
+        roundScore = score;
         endGame.innerHTML = `
         <h1>${currentplayer} you lost your rabbit</h1>
         <p>${currentplayer} final score is ${score}</p>
@@ -221,6 +205,7 @@ const finish = () => {
         <p>${currentplayer} final score is ${score}</p>
         <img src='https://p0.pikist.com/photos/929/976/dog-laptop-computer-glasses-spectacles-office-desk-pet-business.jpg' width= '40%' height= '60%'>
         <button onclick='location.reload()'>Reload</button>
+
         `; 
     } else {
         `<h1>${currentplayer} you the Best</h1>
@@ -234,37 +219,28 @@ const finish = () => {
 }
 
 
-const updateTime = () => {
-    time--;
-    timeLimit.innerHTML = time + 's';
-    //the time is running pass 0 so i need a condition to start and reset the time
-    if(time === 0) {
-        clearInterval(timeInterval);
-        finish()
-    }
-}
 
-const newTime = () => {
-    time--;
-    timeLimit.innerHTML = time + 's';
-    //the time is running pass 0 so i need a condition to start and reset the time
-    if(time === 0) {
-        clearInterval(newInterval);
-        finish()
-    }
-}
+
+
 
 // start game button
 document.getElementById('start').addEventListener('click', () => {
     currentplayer = 'Player One';
     differentPlayers.textContent = 'Player One';
     differentPlayers.style.color = 'red';  
-    // pastPlayer = 'Player One';
     //Timer
     //setInterval allows user to run a specific function
     //In this case i need my time to be updated
+    const updateTime = () => {
+        time--;
+        timeLimit.innerHTML = time + 's';
+        //the time is running pass 0 so i need a condition to start and reset the time
+        if(time === 0) {
+            clearInterval(timeInterval);
+            finish()
+        }
+    }
     timeInterval = setInterval(updateTime, 1100); 
-
 })
 
 // start game button for playerTwo
@@ -272,8 +248,32 @@ document.getElementById('player').addEventListener('click', () => {
     currentplayer = 'Player Two';
     differentPlayers.textContent = 'Player Two';
     differentPlayers.style.color = 'red';
+    const newTime = () => {
+        time--;
+        timeLimit.innerHTML = time + 's';
+        //the time is running pass 0 so i need a condition to start and reset the time
+        if(time === 0) {
+            clearInterval(newInterval);
+            finish()
+        }
+    }
     newInterval = setInterval(newTime, 1100); 
 })
+
+const instructions = document.getElementById('rules')
+document.getElementById('rules').addEventListener('click', () => {
+    instructions.innerHTML = `
+    <p> <br>Difficulty</br>
+    <br>-  Easy- 5 seconds added to every correct word spelled.</br>
+    
+    <br>-  Meduim- 3 seconds added to every correct word spelled.</br>
+    
+    <br>-  Hard - 2 seconds added to every correct word spelled.</br> 
+    </p>
+    <button onclick='location.reload()'>Reload</button>
+    `;
+})
+
 
 changeGame()
 animalWord()

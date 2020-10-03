@@ -192,3 +192,16 @@ background-image: linear-gradient(132deg, #F4D03F 0%, #16A085 100%);
    text-transform: uppercase;
  }
  .final-score:focus { outline: none;}
+
+ #rules {
+  border-radius: 1rem;
+  font-family: 'Sansita Swashed', cursive;
+ }
+
+/*
+ Style Mobile
+ max-width is use when u working from desktop down
+*/
+ /* @media screen and (max-width: 300px) {
+   background: red !important;
+ } */
