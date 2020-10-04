@@ -3,8 +3,7 @@
 
 
 ### Demo App: 
-<img src="https://dazamg.github.io/CatchMe/">
-
+* [CatchMe](https://dazamg.github.io/CatchMe/)
 
 ## Concept:
 * Kids Typing Game created with Html, Javascript , css and Dom Manipulation. A user suppose to be able to challenge themselves or someone else. By typing the displayed word or phrases in different game modes
@@ -19,7 +18,7 @@
 #### Credits:
 *  Unsplash.com  
 *  www.grabient.com
-*  
+*  codeacademy.com
 
 # Approach Taken
 
@@ -42,7 +41,7 @@
 * A user must be able to select different game modes
 * A user must be able to select different difficulties
 * A user must be able to keep typing until the time is up
-* 
+
 
 ## Development Plan
 * I started working with HTML, contructing a game container. The container included a grid(divs). Using h1 and p tags to store the game score and word along with an input box to assign to later in Javascipt.
