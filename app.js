@@ -267,7 +267,7 @@ document.addEventListener('DOMContentLoaded', () => {
             endGame.innerHTML = `
             <h1>${currentplayer} you out of time and lost your rabbit</h1>
             <p>${currentplayer} final score is ${score}</p>
-            <img src='images/lucy-m-KNMbRhf5IT8-unsplash.jpg' width= '35%' height= '65%'>
+            <img src='images/lucy-m-KNMbRhf5IT8-unsplash.jpg' width= '35%' height= '55%'>
             <button onclick='location.reload()'>Reload</button>
             `; 
         }
