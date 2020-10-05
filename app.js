@@ -4,31 +4,33 @@
 // -MUST be able to count the words √
 // -Must be able to display score for how fast they type√
 
-
+//Game mode object 
+const arrObject = {
 // List of Animals
-const words = ['dog', 'rabbit', 'cat', 'shark', 'seahorse', 'turtle',
+    words: ['dog', 'rabbit', 'cat', 'shark', 'seahorse', 'turtle',
     'dolphin', 'tiger', 'bear', 'penguin', 'ladybug', 'elephant','giraffe', 'butterfly',
     'spider', 'dinosaur', 'fox', 'hamster', 'koala', 'anteater'
-]
+],
 
 // List of Moons
-const moonWords = ['earth', 'jupiter', 'saturn', 'neptune', 'mars', 'venus', 
-'uranus', 'mercury', 'pluto']
+    moonWords: ['earth', 'jupiter', 'saturn', 'neptune', 'mars', 'venus', 
+'uranus', 'mercury', 'pluto'],
 
 //List of fruits and veggies
-const fvWords = [ 'banana', 'carrot', 'spinach', 'orange', 'mango', 'grapes', 'strawberry', 
+    fvWords: [ 'banana', 'carrot', 'spinach', 'orange', 'mango', 'grapes', 'strawberry', 
     'apple', 'blueberry', 'pineapple', 'watermelon', 'nectarine', 'pomegranate',
     'cabbage', 'cucumber', 'potato', 'ginger', 'avocado', 'radish',
     'mushroom', 'pepper', 'pumpkin'
-]
+],
 // list of countries
-const countries = [
+    countries: [
     'grenada', 'trinidad and tobacco', 'germany', 'russsia', 'brazil', 'france', 'italy', 
     'united kingdom', 'greece', 'sweden', 'belgium', 'croatia', 'denmark', 'ireland', 
     'ukraine', 'norway', 'argentina', 'bahamas', 'jamaica', 'puerto rico', 'mexico'
 ]
+};
+console.log(arrObject)  
 
-            
 const bigWord = document.getElementById('word')
 const differentPlayers = document.querySelector('.switch')
 const endGame = document.getElementById('end-game-container');
@@ -37,21 +39,31 @@ const textEnter = document.getElementById('text');
 const scores = document.getElementById('score');
 const selectElement = document.querySelector('.gamemode');
 const form = document.getElementById('settings-form');
-let input = document.querySelector('.final-score').value;
+const form2 = document.getElementById('differentarrays');
+const inputScore = document.querySelector('.final-score').value
 let mans = document.getElementById('man');
 const settings = document.getElementById('settings');
 let newInterval, timeInterval;
 
 
 //Set the dropdown values to a default option
+form.addEventListener('change', (e) => {
+    difficulty = e.target.value;
+    localStorage.setItem('difficulty', difficulty);
+});
 const diffSelect = document.getElementById('difficulty');
 let difficulty = localStorage.getItem('difficulty') !== null ?
-localStorage.getItem('difficulty') : 'medium';
+localStorage.getItem('difficulty') : 'easy';
 
 diffSelect.value =
 localStorage.getItem('difficulty') !== null ?
-localStorage.getItem('difficulty') : 'medium';
+localStorage.getItem('difficulty') : 'easy';
 
+
+form2.addEventListener('change', (e) => {
+    difficulty = e.target.value;
+     localStorage.setItem('modes', modes);
+})
 const gameType = document.getElementById('modes');
 let modes = localStorage.getItem('modes') !== null ?
 localStorage.getItem('modes') : 'country';
@@ -119,20 +131,20 @@ let errors = 0;
 
 //function to return a random Animal
 const randomWords = () => {
-    return words[Math.floor(Math.random() * words.length)];    
+    return arrObject.words[Math.floor(Math.random() * arrObject.words.length)];    
 }
 //function to return a random Planet
 const randomPlanet = () => {
-    return moonWords[Math.floor(Math.random() * moonWords.length)];    
+    return arrObject.moonWords[Math.floor(Math.random() * arrObject.moonWords.length)];    
 }
 //function to return a random fruit or veggies
 const randomFruits = () => {
-    return fvWords[Math.floor(Math.random() * fvWords.length)];    
+    return arrObject.fvWords[Math.floor(Math.random() * arrObject.fvWords.length)];    
 }
 
 //function to return a random countries
 const randomCountries = () => {
-    return countries[Math.floor(Math.random() * countries.length)];    
+    return arrObject.countries[Math.floor(Math.random() * arrObject.countries.length)];    
 }
 
 //Function to update score
@@ -250,10 +262,19 @@ const inputText = () => {
     })
 }
 
-form.addEventListener('change', (e) => {
-    difficulty = e.target.value;
-    localStorage.setItem('difficulty', difficulty);
-});
+// const desireScore = () => {
+    
+//     if(inputScore) {
+//         roundScore = inputScore;
+//         differentPlayers.innerHTML = 'winner';
+//     } else {
+//         finish()
+//     }
+//     console.log(de)
+// };
+
+
+
 
 
 
@@ -262,8 +283,9 @@ document.addEventListener('DOMContentLoaded', () => {
     //function to finish and reset game
       
     const finish = () => {
+        
         if(score <= 7) {
-            roundScore = score;
+            
             endGame.innerHTML = `
             <h1>${currentplayer} you out of time and lost your rabbit</h1>
             <p>${currentplayer} final score is ${score}</p>
@@ -272,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
             `; 
         }
         else if(score > 7 || score <= 12) {
+            
             endGame.innerHTML = `
             <h1>${currentplayer} you out of time and you're an All Star</h1>
             <p>${currentplayer} final score is ${score}</p>
@@ -280,6 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
             `; 
         } else {
+            
             `<h1>${currentplayer} you out of time and you're the Best</h1>
             <p>${currentplayer} final score is ${score}</p>
             <img src=''>
@@ -292,6 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // start game button
     document.getElementById('start').addEventListener('click', () => {
+       
         currentplayer = 'Player One';
         differentPlayers.textContent = 'Player One';
         differentPlayers.style.color = 'red';  
@@ -308,6 +333,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
         timeInterval = setInterval(updateTime, 1100); 
+       
+
     })
     
     // start game button for playerTwo
@@ -322,6 +349,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if(time === 0) {
                 clearInterval(newInterval);
                 finish()
+                
             }
         }
         newInterval = setInterval(newTime, 1100); 
@@ -349,15 +377,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-form.addEventListener('change', (e) => {
-  difficulty = e.target.value;
-   localStorage.setItem('difficulty', difficulty);
-})
 
-form.addEventListener('change', (e) => {
-    difficulty = e.target.value;
-     localStorage.setItem('modes', modes);
-})
+
+
 
 
 changeGame()
