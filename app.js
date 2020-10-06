@@ -30,7 +30,7 @@ const arrObject = {
     'ukraine', 'norway', 'argentina', 'bahamas', 'jamaica', 'puerto rico', 'mexico'
 ],
 
-    animalPhrases: ['This animal is a ', 'i want see a ', 'how big are ', 'i love '],
+    animalPhrases: ['This animal is a ', 'i want to see a ', 'how big are ', 'i love '],
 
     fruitPhrases: ['i love ', 'i hate ', 'what is a '],
 
