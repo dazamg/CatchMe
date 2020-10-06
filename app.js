@@ -14,7 +14,8 @@ const arrObject = {
 
 // List of Moons
     moonWords: ['earth', 'jupiter', 'saturn', 'neptune', 'mars', 'venus', 
-'uranus', 'mercury', 'pluto'],
+'uranus', 'mercury', 'pluto', 'new moon', 'full moon', 'last quarter', 'first quarter', 
+'waxing crescent', 'waning gibbous', 'waning crescent'],
 
 //List of fruits and veggies
     fvWords: [ 'banana', 'carrot', 'spinach', 'orange', 'mango', 'grapes', 'strawberry', 
@@ -27,7 +28,13 @@ const arrObject = {
     'grenada', 'trinidad and tobacco', 'germany', 'russsia', 'brazil', 'france', 'italy', 
     'united kingdom', 'greece', 'sweden', 'belgium', 'croatia', 'denmark', 'ireland', 
     'ukraine', 'norway', 'argentina', 'bahamas', 'jamaica', 'puerto rico', 'mexico'
-]
+],
+
+    animalPhrases: ['This animal is a ', 'i want see a ', 'how big are ', 'i love '],
+
+    fruitPhrases: ['i love ', 'i hate ', 'what is a '],
+
+    countryPhrases: ['i never been to ', 'where is ', 'i love ', 'i was born in ']
 };
 console.log(arrObject)  
 
@@ -47,10 +54,6 @@ let newInterval, timeInterval;
 
 
 //Set the dropdown values to a default option
-form.addEventListener('change', (e) => {
-    difficulty = e.target.value;
-    localStorage.setItem('difficulty', difficulty);
-});
 const diffSelect = document.getElementById('difficulty');
 let difficulty = localStorage.getItem('difficulty') !== null ?
 localStorage.getItem('difficulty') : 'easy';
@@ -59,11 +62,6 @@ diffSelect.value =
 localStorage.getItem('difficulty') !== null ?
 localStorage.getItem('difficulty') : 'easy';
 
-
-form2.addEventListener('change', (e) => {
-    difficulty = e.target.value;
-     localStorage.setItem('modes', modes);
-})
 const gameType = document.getElementById('modes');
 let modes = localStorage.getItem('modes') !== null ?
 localStorage.getItem('modes') : 'country';
@@ -79,7 +77,7 @@ let planetArray;
 let countryArray;
 
 //Variable for time
-let time = 11;
+let time = 16;
 
 //Variable for score
 let score = 0;
@@ -146,7 +144,15 @@ const randomFruits = () => {
 const randomCountries = () => {
     return arrObject.countries[Math.floor(Math.random() * arrObject.countries.length)];    
 }
-
+const animalPhrase = () => {
+    return arrObject.animalPhrases[Math.floor(Math.random() * arrObject.animalPhrases.length)];    
+}
+const fruitPhrase = () => {
+    return arrObject.fruitPhrases[Math.floor(Math.random() * arrObject.fruitPhrases.length)];    
+}
+const countryPhrase = () => {
+    return arrObject.countryPhrases[Math.floor(Math.random() * arrObject.countryPhrases.length)];    
+}
 //Function to update score
 const addScore = () => {
     score++;
@@ -178,7 +184,7 @@ const changeGame = () => {
 
 //function to change arrays to a randomword
 const animalWord = (changeGame) => {
-    randomWord = randomWords();
+    randomWord = animalPhrase() + randomWords();
     word.innerText = randomWord;
     
  }  
@@ -190,13 +196,13 @@ const planetWord = (changeGame) => {
 }
 
 const fruitWord = (changeGame) => {
-    fruitArray = randomFruits();
+    fruitArray = fruitPhrase() + randomFruits();
     word.innerText = fruitArray; 
      
 }
 
 const CountryWords = (changeGame) => {
-    countryArray = randomCountries();
+    countryArray = countryPhrase( ) + randomCountries();
     word.innerText = countryArray; 
 }
 
@@ -263,14 +269,16 @@ const inputText = () => {
 }
 
 // const desireScore = () => {
+//     inputScore.addEventListener('input', (e) => {
+//         const newScore = e.target.value;
+//         if(newScore === score) {
+            
+//             differentPlayers.innerHTML = 'winner';
+//         } else {
+//             differentPlayers.innerHTML = 'try harder';
+//         }
+//     })
     
-//     if(inputScore) {
-//         roundScore = inputScore;
-//         differentPlayers.innerHTML = 'winner';
-//     } else {
-//         finish()
-//     }
-//     console.log(de)
 // };
 
 
@@ -283,9 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //function to finish and reset game
       
     const finish = () => {
-        
-        if(score <= 7) {
-            
+        if(score <= 7) {           
             endGame.innerHTML = `
             <h1>${currentplayer} you out of time and lost your rabbit</h1>
             <p>${currentplayer} final score is ${score}</p>
@@ -316,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // start game button
     document.getElementById('start').addEventListener('click', () => {
-       
+        
         currentplayer = 'Player One';
         differentPlayers.textContent = 'Player One';
         differentPlayers.style.color = 'red';  
@@ -330,9 +336,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if(time === 0) {
                 clearInterval(timeInterval);
                 finish()
+                
             }
         }
-        timeInterval = setInterval(updateTime, 1100); 
+        timeInterval = setInterval(updateTime, 1600); 
        
 
     })
@@ -352,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 
             }
         }
-        newInterval = setInterval(newTime, 1100); 
+        newInterval = setInterval(newTime, 1600); 
     })
     
     //Instructions button
@@ -376,18 +383,13 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 
 
-
-
-
-
-
-
 changeGame()
 animalWord()
 planetWord()
 inputText()
 fruitWord()
 CountryWords()
+// desireScore()
 
 
 // let optionTwo = document.getElementById('two')
