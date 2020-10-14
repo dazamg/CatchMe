@@ -93,40 +93,6 @@ let roundScore = 0;
 //variable for error
 let errors = 0;
 
-// I need to continue this after looping through the individual index for the string 
-// let penaltyText = document.querySelector('final-score')
-// let total_penalty = 0;
-// characterEntered;
-
-// const errorPenalty = () => {
-    //get current input
-    // let word_input = textEnter.value;
-    // let word_input.array = word_input.split('');
-
-    // characterEntered++;
-
-    // errors = 0;
-
-    // let charSpanArray = bigWord.querySelectorAll('span')
-
-    // //loop through the span elements
-    // charSpanArray.forEach((char. index) => {
-    //     let typedChar = curr_input[index];
-
-    //    // characters currently not typed 
-    //    if(typedChar = null) {
-
-    //    } typedChar === char.innerText {
-
-    //    } else {
-
-    //    }
-    // })
-
-// }
-
-
-
 //function to return a random Animal
 const randomWords = () => {
     return arrObject.words[Math.floor(Math.random() * arrObject.words.length)];    
@@ -268,25 +234,6 @@ const inputText = () => {
     })
 }
 
-// const desireScore = () => {
-//     inputScore.addEventListener('input', (e) => {
-//         const newScore = e.target.value;
-//         if(newScore === score) {
-            
-//             differentPlayers.innerHTML = 'winner';
-//         } else {
-//             differentPlayers.innerHTML = 'try harder';
-//         }
-//     })
-    
-// };
-
-
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', () => {
     //function to finish and reset game
       
@@ -389,25 +336,39 @@ planetWord()
 inputText()
 fruitWord()
 CountryWords()
-// desireScore()
 
 
-// let optionTwo = document.getElementById('two')
-// let optionThree = document.getElementById('three')
-// console.log(optionTwo.value)
-// const newArray = document.getElementById('differentarrays');
-// form.addEventListener('change', (e) => {
-//     games = e.target.value;
-//     localStorage.setItem('cldd', games);
-// }); 
 
-// const spellcheck = () => {
-    //     let textEntered = textEnter.value;
-    //     let originTextMatch = bigWord.substring(0, textEntered.length);
-    //     if(textEntered === bigWord) {
-        //         text.style.borderColor = 'red';
-        //     } else {
-            //         time -= 4;
-            //     }
-            // }
-            // 
+
+
+// I need to continue this to figure out my error penalties after looping through the individual index for the string 
+// let penaltyText = document.querySelector('final-score')
+// let total_penalty = 0;
+// characterEntered;
+
+// const errorPenalty = () => {
+    //get current input
+    // let word_input = textEnter.value;
+    // let word_input.array = word_input.split('');
+
+    // characterEntered++;
+
+    // errors = 0;
+
+    // let charSpanArray = bigWord.querySelectorAll('span')
+
+    // //loop through the span elements
+    // charSpanArray.forEach((char. index) => {
+    //     let typedChar = curr_input[index];
+
+    //    // characters currently not typed 
+    //    if(typedChar = null) {
+
+    //    } typedChar === char.innerText {
+
+    //    } else {
+
+    //    }
+    // })
+
+// }
